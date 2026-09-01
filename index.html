@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HerramientasTOP — Las mejores herramientas digitales, probadas y comparadas</title>
+<meta name="description" content="Descubre las mejores herramientas digitales para trabajar, crear y vender online. Recomendaciones probadas, precios actualizados y comparativas honestas.">
+<meta property="og:title" content="HerramientasTOP — Herramientas digitales probadas">
+<meta property="og:description" content="Recomendaciones honestas de herramientas digitales. Ahorra tiempo y dinero con nuestras comparativas.">
+<meta property="og:type" content="website">
+
+<!-- ============================================================
+     PÁGINA DE AFILIADOS — GUÍA RÁPIDA DE PERSONALIZACIÓN
+     ------------------------------------------------------------
+     1) REEMPLAZA los enlaces marcados con "AFILIADO:" por tus
+        propios enlaces de afiliado (ver GUIA.md).
+     2) Cambia el nombre del sitio, colores (CSS variables) y
+        productos según tu nicho.
+     3) Sube el archivo a Netlify, GitHub Pages o Vercel (gratis).
+     ============================================================ -->
+
+<style>
+  :root{
+    --fondo: #f6f7fb;
+    --texto: #1f2430;
+    --texto-suave: #5b6270;
+    --primario: #5b5bd6;
+    --primario-osc: #4338ca;
+    --acento: #22d3ee;
+    --blanco: #ffffff;
+    --borde: #e4e7f0;
+    --sombra: 0 8px 24px rgba(31,36,48,.08);
+    --radio: 16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--texto);
+    background:var(--fondo);
+    line-height:1.6;
+  }
+  a{color:var(--primario);text-decoration:none}
+  img{max-width:100%}
+
+  /* ---------- Navegación ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--borde);
+  }
+  .nav{
+    max-width:1100px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-weight:800;font-size:1.25rem;color:var(--primario)}
+  .logo span{color:var(--acento)}
+  nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+  nav a{color:var(--texto);font-weight:500;font-size:.95rem}
+  nav a:hover{color:var(--primario)}
+  .btn-nav{
+    background:var(--primario);color:#fff!important;padding:9px 18px;border-radius:999px;
+  }
+  .btn-nav:hover{background:var(--primario-osc)}
+  #menu-toggle{display:none}
+  .menu-icon{display:none;font-size:1.5rem;cursor:pointer;user-select:none}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg,#4338ca 0%,#5b5bd6 45%,#0ea5b7 100%);
+    color:#fff;text-align:center;padding:90px 20px 110px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 80% 20%,rgba(34,211,238,.35),transparent 45%);
+  }
+  .hero .contenido{position:relative;z-index:1;max-width:760px;margin:0 auto}
+  .hero .badge{
+    display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);
+    padding:6px 16px;border-radius:999px;font-size:.85rem;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;margin-bottom:18px;font-weight:800}
+  .hero p{font-size:1.15rem;opacity:.94;max-width:600px;margin:0 auto 34px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cta{
+    display:inline-block;background:#fff;color:var(--primario-osc);font-weight:700;
+    padding:14px 30px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.18);
+    transition:transform .15s ease;
+  }
+  .cta:hover{transform:translateY(-2px)}
+  .cta.secundario{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
+  .cta.secundario:hover{background:rgba(255,255,255,.12)}
+
+  /* ---------- Barra de confianza ---------- */
+  .confianza{max-width:1100px;margin:-50px auto 0;padding:0 20px;position:relative;z-index:2}
+  .confianza-inner{
+    background:#fff;border-radius:var(--radio);box-shadow:var(--sombra);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:24px 20px;
+  }
+  .confianza-item{display:flex;align-items:center;gap:12px;justify-content:center;text-align:left}
+  .confianza-item svg{flex-shrink:0}
+  .confianza-item strong{display:block;font-size:.95rem}
+  .confianza-item small{color:var(--texto-suave);font-size:.82rem}
+
+  /* ---------- Secciones generales ---------- */
+  section{padding:70px 20px}
+  .contenedor{max-width:1100px;margin:0 auto}
+  .seccion-titulo{text-align:center;max-width:640px;margin:0 auto 46px}
+  .seccion-titulo h2{font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:12px}
+  .seccion-titulo p{color:var(--texto-suave)}
+
+  /* ---------- Tarjetas de ofertas ---------- */
+  .ofertas{background:#fff;border-top:1px solid var(--borde);border-bottom:1px solid var(--borde)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
+  .tarjeta{
+    background:var(--fondo);border:1px solid var(--borde);border-radius:var(--radio);
+    padding:26px;display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .tarjeta:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
+  .tarjeta .cabecera{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .tarjeta .icono{
+    width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--c1),var(--c2));flex-shrink:0;
+  }
+  .tarjeta h3{font-size:1.1rem}
+  .tarjeta .categoria{color:var(--texto-suave);font-size:.82rem}
+  .tarjeta p{color:var(--texto-suave);font-size:.92rem;flex-grow:1;margin-bottom:16px}
+  .tarjeta .precio{
+    display:inline-block;background:#eef0ff;color:var(--primario-osc);font-weight:700;
+    padding:4px 12px;border-radius:999px;font-size:.83rem;margin-bottom:14px;
+  }
+  .estrellas{color:#f59e0b;font-size:.95rem;letter-spacing:2px}
+  .btn-oferta{
+    display:block;text-align:center;background:var(--primario);color:#fff;font-weight:700;
+    padding:12px;border-radius:12px;transition:background .15s ease;
+  }
+  .btn-oferta:hover{background:var(--primario-osc)}
+
+  /* ---------- Categorías ---------- */
+  .categorias-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+  .categoria{
+    background:#fff;border:1px solid var(--borde);border-radius:14px;padding:22px;text-align:center;
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .categoria:hover{transform:translateY(-3px);box-shadow:var(--sombra)}
+  .categoria svg{margin-bottom:10px}
+  .categoria strong{display:block;margin-bottom:4px}
+  .categoria small{color:var(--texto-suave)}
+
+  /* ---------- Transparencia ---------- */
+  .transparencia{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0}
+  .transparencia .seccion-titulo h2{color:#fff}
+  .transparencia .seccion-titulo p{color:#94a3b8}
+  .transparencia-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+  .punto{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;padding:24px;
+  }
+  .punto strong{display:block;color:#fff;margin-bottom:8px}
+  .punto p{font-size:.92rem;color:#94a3b8}
+  .aviso{
+    margin-top:32px;font-size:.85rem;color:#94a3b8;background:rgba(255,255,255,.05);
+    border-left:4px solid var(--acento);padding:14px 18px;border-radius:8px;
+  }
+
+  /* ---------- Newsletter ---------- */
+  .newsletter{background:var(--fondo)}
+  .newsletter-box{
+    background:#fff;border:1px solid var(--borde);border-radius:var(--radio);
+    box-shadow:var(--sombra);max-width:640px;margin:0 auto;padding:42px;text-align:center;
+  }
+  .newsletter-box h2{margin-bottom:10px}
+  .newsletter-box p{color:var(--texto-suave);margin-bottom:24px}
+  form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  input[type=email]{
+    flex:1;min-width:240px;padding:13px 18px;border:1px solid var(--borde);border-radius:12px;
+    font-size:.95rem;outline:none;
+  }
+  input[type=email]:focus{border-color:var(--primario)}
+  button[type=submit]{
+    background:var(--primario);color:#fff;font-weight:700;padding:13px 26px;border:none;
+    border-radius:12px;cursor:pointer;font-size:.95rem;
+  }
+  button[type=submit]:hover{background:var(--primario-osc)}
+  .newsletter-ok{color:#16a34a;font-weight:600;margin-top:12px;display:none}
+
+  /* ---------- FAQ ---------- */
+  .faq{background:#fff;border-top:1px solid var(--borde)}
+  .faq-item{
+    max-width:720px;margin:0 auto 14px;background:var(--fondo);border:1px solid var(--borde);
+    border-radius:12px;padding:18px 22px;
+  }
+  .faq-item summary{cursor:pointer;font-weight:600;font-size:1rem}
+  .faq-item p{margin-top:10px;color:var(--texto-suave);font-size:.93rem}
+
+  /* ---------- Footer ---------- */
+  footer{background:#0f172a;color:#94a3b8;padding:44px 20px 34px}
+  .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start}
+  .footer-inner h4{color:#fff;margin-bottom:10px;font-size:1rem}
+  .footer-inner ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+  .footer-inner a{color:#94a3b8}
+  .footer-inner a:hover{color:#fff}
+  .footer-legal{
+    max-width:1100px;margin:26px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+    font-size:.8rem;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:820px){
+    nav ul{
+      display:none;position:absolute;top:100%;left:0;right:0;background:#fff;
+      flex-direction:column;padding:20px;gap:16px;border-bottom:1px solid var(--borde);
+      box-shadow:var(--sombra);
+    }
+    #menu-toggle:checked ~ nav ul{display:flex}
+    .menu-icon{display:block}
+    .confianza-inner{grid-template-columns:1fr;gap:18px}
+    .confianza-item{justify-content:flex-start}
+    .hero{padding:70px 20px 100px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAVEGACIÓN ================= -->
+<header>
+  <div class="nav">
+    <a href="#inicio" class="logo">Herramientas<span>TOP</span></a>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon" aria-label="Abrir menú">&#9776;</label>
+    <nav>
+      <ul>
+        <li><a href="#ofertas">Ofertas destacadas</a></li>
+        <li><a href="#categorias">Categorías</a></li>
+        <li><a href="#transparencia">Por qué confiar</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#newsletter" class="btn-nav">Suscríbete</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="contenido">
+    <span class="badge">Recomendaciones probadas · Precios actualizados</span>
+    <h1>Las mejores herramientas digitales para trabajar, crear y vender online</h1>
+    <p>Probamos, comparamos y seleccionamos las herramientas que de verdad valen la pena, para que ahorres tiempo y dinero.</p>
+    <div class="cta-row">
+      <a href="#ofertas" class="cta">Ver ofertas destacadas</a>
+      <a href="#transparencia" class="cta secundario">Cómo recomendamos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BARRA DE CONFIANZA ================= -->
+<div class="confianza">
+  <div class="confianza-inner">
+    <div class="confianza-item">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      <div><strong>Sin coste para ti</strong><small>Usar esta web es gratis</small></div>
+    </div>
+    <div class="confianza-item">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+      <div><strong>Probado de verdad</strong><small>Testeamos cada herramienta</small></div>
+    </div>
+    <div class="confianza-item">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div><strong>Transparencia total</strong><small>Puedes ganar comisiones por tu compra</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= OFERTAS DESTACADAS ================= -->
+<section class="ofertas" id="ofertas">
+  <div class="contenedor">
+    <div class="seccion-titulo">
+      <h2>Ofertas destacadas de esta semana</h2>
+      <p>Selección de las herramientas con mejor relación calidad-precio. Los precios son orientativos y pueden variar.</p>
+    </div>
+    <div class="grid">
+
+      <!-- TARJETA: HOSTINGER -->
+      <article class="tarjeta" style="--c1:#673ab7;--c2:#9c27b0">
+        <div class="cabecera">
+          <div class="icono">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+          </div>
+          <div>
+            <h3>Hostinger</h3>
+            <div class="categoria">Hosting web</div>
+          </div>
+        </div>
+        <p>Hosting rápido y barato para tu web o tienda online. Ideal para empezar, con dominio incluido.</p>
+        <span class="precio">Desde 2,99 €/mes</span>
+        <div class="estrellas">★★★★★</div>
+        <!-- AFILIADO: reemplaza el href por TU enlace de afiliado de Hostinger -->
+        <a class="btn-oferta" href="https://www.hostinger.es/affiliate-program" target="_blank" rel="noopener sponsored">Ver oferta</a>
+      </article>
+
+      <!-- TARJETA: CANVA -->
+      <article class="tarjeta" style="--c1:#00c4cc;--c2:#7d2ae8">
+        <div class="cabecera">
+          <div class="icono">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <div>
+            <h3>Canva Pro</h3>
+            <div class="categoria">Diseño gráfico</div>
+          </div>
+        </div>
+        <p>Crea diseños profesionales en minutos: redes sociales, presentaciones y vídeos. Imprescindible para tu marca.</p>
+        <span class="precio">Desde 12,99 €/mes</span>
+        <div class="estrellas">★★★★★</div>
+        <!-- AFILIADO: reemplaza el href por TU enlace de afiliado de Canva -->
+        <a class="btn-oferta" href="https://www.canva.com/es_es/affiliates/" target="_blank" rel="noopener sponsored">Ver oferta</a>
+      </article>
+
+      <!-- TARJETA: NORDVPN -->
+      <article class="tarjeta" style="--c1:#003a70;--c2:#0d6efd">
+        <div class="cabecera">
+          <div class="icono">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div>
+            <h3>NordVPN</h3>
+            <div class="categoria">Seguridad y privacidad</div>
+          </div>
+        </div>
+        <p>Navega con privacidad y acceso a contenido internacional. Rápido, seguro y con garantía de 30 días.</p>
+        <span class="precio">Desde 3,19 €/mes</span>
+        <div class="estrellas">★★★★★</div>
+        <!-- AFILIADO: reemplaza el href por TU enlace de afiliado de NordVPN -->
+        <a class="btn-oferta" href="https://nordvpn.com/es/affiliate/" target="_blank" rel="noopener sponsored">Ver oferta</a>
+      </article>
+
+      <!-- TARJETA: NOTION -->
+      <article class="tarjeta" style="--c1:#1f1f1f;--c2:#555555">
+        <div class="cabecera">
+          <div class="icono">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+          </div>
+          <div>
+            <h3>Notion</h3>
+            <div class="categoria">Productividad</div>
+          </div>
+        </div>
+        <p>Tu espacio de trabajo todo-en-uno: notas, bases de datos, wikis y proyectos. Plan gratuito muy completo.</p>
+        <span class="precio">Gratis · Plus desde 10 €/mes</span>
+        <div class="estrellas">★★★★★</div>
+        <!-- AFILIADO: reemplaza el href por TU enlace de afiliado de Notion -->
+        <a class="btn-oferta" href="https://www.notion.com/es-es/affiliates" target="_blank" rel="noopener sponsored">Ver oferta</a>
+      </article>
+
+      <!-- TARJETA: SEMRUSH -->
+      <article class="tarjeta" style="--c1:#ff642d;--c2:#ff8a4c">
+        <div class="cabecera">
+          <div class="icono">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-6 4 3 5-7"/></svg>
+          </div>
+          <div>
+            <h3>Semrush</h3>
+            <div class="categoria">SEO y marketing</div>
+          </div>
+        </div>
+        <p>La suite de marketing digital más completa: SEO, contenido, publicidad y análisis de la competencia.</p>
+        <span class="precio">Prueba gratuita de 14 días</span>
+        <div class="estrellas">★★★★★</div>
+        <!-- AFILIADO: reemplaza el href por TU enlace de afiliado de Semrush -->
+        <a class="btn-oferta" href="https://www.semrush.com/es/affiliates/" target="_blank" rel="noopener sponsored">Ver oferta</a>
+      </article>
+
+      <!-- TARJETA: FIVERR -->
+      <article class="tarjeta" style="--c1:#00b14f;--c2:#1dbf73">
+        <div class="cabecera">
+          <div class="icono">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <h3>Fiverr</h3>
+            <div class="categoria">Servicios freelance</div>
+          </div>
+        </div>
+        <p>Contrata expertos en diseño, programación, marketing y más, o gana dinero ofreciendo tus servicios.</p>
+        <span class="precio">Servicios desde 5 €</span>
+        <div class="estrellas">★★★★★</div>
+        <!-- AFILIADO: reemplaza el href por TU enlace de afiliado de Fiverr -->
+        <a class="btn-oferta" href="https://es.fiverr.com/affiliate-program" target="_blank" rel="noopener sponsored">Ver oferta</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORÍAS ================= -->
+<section id="categorias">
+  <div class="contenedor">
+    <div class="seccion-titulo">
+      <h2>Explora por categoría</h2>
+      <p>Encuentra la herramienta perfecta para cada necesidad de tu negocio o proyecto.</p>
+    </div>
+    <div class="categorias-grid">
+      <div class="categoria">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        <strong>Productividad</strong><small>Notas, gestión de tareas y proyectos</small>
+      </div>
+      <div class="categoria">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
+        <strong>Diseño</strong><small>Gráficos, vídeo y branding</small>
+      </div>
+      <div class="categoria">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-6 4 3 5-7"/></svg>
+        <strong>SEO y marketing</strong><small>Posicionamiento, análisis y campañas</small>
+      </div>
+      <div class="categoria">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <strong>Seguridad</strong><small>VPN, gestores de contraseñas y copias</small>
+      </div>
+      <div class="categoria">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <strong>E-commerce</strong><small>Tiendas online y pasarelas de pago</small>
+      </div>
+      <div class="categoria">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5b5bd6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
+        <strong>IA y automatización</strong><small>Asistentes, chatbots y flujos automáticos</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRANSPARENCIA ================= -->
+<section class="transparencia" id="transparencia">
+  <div class="contenedor">
+    <div class="seccion-titulo">
+      <h2>Por qué puedes confiar en nuestras recomendaciones</h2>
+      <p>Ganamos dinero solo si tú compras a través de nuestros enlaces. Nunca pagas más por ello.</p>
+    </div>
+    <div class="transparencia-grid">
+      <div class="punto">
+        <strong>Probamos antes de recomendar</strong>
+        <p>Cada herramienta pasa por un periodo de prueba real. Si no nos convence, no aparece en la lista.</p>
+      </div>
+      <div class="punto">
+        <strong>Mismo precio para ti</strong>
+        <p>Comprar desde nuestros enlaces nunca aumenta el precio. A veces incluso consigues descuentos exclusivos.</p>
+      </div>
+      <div class="punto">
+        <strong>Comisiones que nos ayudan</strong>
+        <p>Una pequeña comisión (pagada por la marca, no por ti) nos permite mantener el contenido gratuito.</p>
+      </div>
+    </div>
+    <div class="aviso">
+      <strong>Divulgación de afiliados:</strong> esta página contiene enlaces de afiliado. Si compras a través de ellos, podemos recibir una comisión sin coste adicional para ti. Solo recomendamos productos que hemos probado o considerado realmente útiles. Para más detalles, consulta nuestros términos.
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEWSLETTER ================= -->
+<section class="newsletter" id="newsletter">
+  <div class="contenedor">
+    <div class="newsletter-box">
+      <h2>Recibe las mejores ofertas en tu email</h2>
+      <p>Únete a la lista y recibirás descuentos exclusivos y nuevas comparativas cada semana. Sin spam.</p>
+      <!-- NEWSLETTER: conecta este formulario a Mailchimp, Buttondown o Brevo
+           (sustituye action y añade el campo oculto de tu proveedor). -->
+      <form id="newsletter-form">
+        <input type="email" id="email" placeholder="tu@email.com" required aria-label="Tu correo electrónico">
+        <button type="submit">Suscribirme</button>
+      </form>
+      <div class="newsletter-ok" id="newsletter-ok">¡Gracias por suscribirte! Revisa tu bandeja de entrada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq" id="faq">
+  <div class="contenedor">
+    <div class="seccion-titulo">
+      <h2>Preguntas frecuentes</h2>
+      <p>Resolvemos las dudas más comunes sobre cómo funciona esta página.</p>
+    </div>
+    <details class="faq-item">
+      <summary>¿Cómo ganáis dinero si la web es gratis?</summary>
+      <p>Cuando compras un producto a través de nuestros enlaces, la marca nos paga una comisión de afiliado. Para ti el precio es exactamente el mismo.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Las recomendaciones son imparciales?</summary>
+      <p>Sí. Probamos cada herramienta antes de incluirla y no aceptamos pagos por aparecer en la lista. Si una herramienta deja de merecer la pena, la retiramos.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cómo elegís las ofertas destacadas?</summary>
+      <p>Combinamos calidad real, precio, facilidad de uso y soporte. Priorizamos herramientas que resuelven problemas concretos y tienen buena relación calidad-precio.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Los precios están actualizados?</summary>
+      <p>Actualizamos los precios con frecuencia, pero pueden variar según país, promociones y cambios de las marcas. Consulta siempre el precio final en la página oficial.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>HerramientasTOP</h4>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#ofertas">Ofertas destacadas</a></li>
+        <li><a href="#categorias">Categorías</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#transparencia">Divulgación de afiliados</a></li>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Aviso legal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">contacto@tudominio.com</a></li>
+        <li><a href="#">Colaboraciones</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <span>© <span id="anio"></span> HerramientasTOP. Todos los derechos reservados.</span>
+    <span>Como asociados de los programas de afiliados mencionados, podemos ganar comisiones por las compras realizadas a través de nuestros enlaces.</span>
+  </div>
+</footer>
+
+<script>
+  // Año dinámico en el footer
+  document.getElementById('anio').textContent = new Date().getFullYear();
+
+  // Confirmación del formulario de newsletter (sin envío real todavía)
+  document.getElementById('newsletter-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('newsletter-ok').style.display = 'block';
+    document.getElementById('email').value = '';
+  });
+</script>
+
+</body>
+</html>
