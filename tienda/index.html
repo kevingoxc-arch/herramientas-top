@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda — HerramientasTOP | Plantillas y guías digitales</title>
+<meta name="description" content="Tienda online de HerramientasTOP: plantillas, guías y recursos digitales para emprendedores. Descarga inmediata y pago seguro con PayPal.">
+
+<!-- ============================================================
+     TIENDA ONLINE — HerramientasTOP
+     ------------------------------------------------------------
+     PARA ACTIVAR LOS PAGOS (5 min):
+     1) Crea tu cuenta PayPal Business (gratis).
+     2) Entra en developer.paypal.com -> Apps y credenciales
+        -> Crea una app -> copia tu "Client ID".
+     3) Pega el Client ID abajo en PAYPAL_CLIENT_ID.
+     Para cambiar productos: edita el array PRODUCTOS (abajo).
+     Ver TIENDA.md para la guía completa.
+     ============================================================ -->
+
+<style>
+  :root{
+    --fondo: #f6f7fb;
+    --texto: #1f2430;
+    --texto-suave: #5b6270;
+    --primario: #5b5bd6;
+    --primario-osc: #4338ca;
+    --acento: #22d3ee;
+    --blanco: #ffffff;
+    --borde: #e4e7f0;
+    --sombra: 0 8px 24px rgba(31,36,48,.08);
+    --radio: 16px;
+    --ok: #16a34a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--texto);background:var(--fondo);line-height:1.6;
+  }
+  a{color:var(--primario);text-decoration:none}
+  img{max-width:100%}
+
+  /* ---------- Navegación ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--borde);
+  }
+  .nav{
+    max-width:1100px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-weight:800;font-size:1.25rem;color:var(--primario)}
+  .logo span{color:var(--acento)}
+  nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+  nav a{color:var(--texto);font-weight:500;font-size:.95rem}
+  nav a:hover{color:var(--primario)}
+  nav a.activo{color:var(--primario);font-weight:700}
+  .btn-nav{background:var(--primario);color:#fff!important;padding:9px 18px;border-radius:999px}
+  .btn-nav:hover{background:var(--primario-osc)}
+  .carrito-link{position:relative}
+  .carrito-link .contador{
+    position:absolute;top:-8px;right:-14px;background:#ef4444;color:#fff;
+    font-size:.7rem;font-weight:700;min-width:18px;height:18px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;padding:0 4px;
+  }
+  #menu-toggle{display:none}
+  .menu-icon{display:none;font-size:1.5rem;cursor:pointer;user-select:none}
+
+  /* ---------- Hero tienda ---------- */
+  .hero-tienda{
+    background:linear-gradient(135deg,#0ea5b7 0%,#4338ca 60%,#5b5bd6 100%);
+    color:#fff;text-align:center;padding:70px 20px 60px;
+  }
+  .hero-tienda h1{font-size:clamp(1.8rem,4.5vw,2.6rem);margin-bottom:12px}
+  .hero-tienda p{font-size:1.1rem;opacity:.94;max-width:600px;margin:0 auto}
+  .hero-tienda .badge{
+    display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);
+    padding:6px 16px;border-radius:999px;font-size:.85rem;margin-bottom:18px;
+  }
+
+  /* ---------- Catálogo ---------- */
+  .catalogo{max-width:1100px;margin:0 auto;padding:50px 20px 70px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+  .producto{
+    background:#fff;border:1px solid var(--borde);border-radius:var(--radio);
+    overflow:hidden;display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .producto:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
+  .producto .portada{
+    height:150px;display:flex;align-items:center;justify-content:center;position:relative;
+    background:linear-gradient(135deg,var(--c1),var(--c2));
+  }
+  .producto .portada svg{opacity:.95}
+  .producto .badge{
+    position:absolute;top:12px;left:12px;background:#fff;color:var(--primario-osc);
+    font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:999px;
+  }
+  .producto .info{padding:20px 22px;display:flex;flex-direction:column;flex-grow:1}
+  .producto .categoria{color:var(--texto-suave);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+  .producto h3{font-size:1.05rem;margin:6px 0 8px}
+  .producto p{color:var(--texto-suave);font-size:.9rem;flex-grow:1;margin-bottom:14px}
+  .producto .fila{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .producto .precio{font-weight:800;font-size:1.15rem}
+  .producto .precio small{color:var(--texto-suave);font-weight:400;font-size:.8rem}
+  .btn-add{
+    background:var(--primario);color:#fff;font-weight:700;padding:10px 18px;border:none;
+    border-radius:10px;cursor:pointer;font-size:.9rem;transition:background .15s ease;
+  }
+  .btn-add:hover{background:var(--primario-osc)}
+  .btn-add:disabled{background:#cbd5e1;cursor:not-allowed}
+
+  /* ---------- Carrito (drawer) ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(15,23,42,.5);opacity:0;pointer-events:none;
+    transition:opacity .2s ease;z-index:90;
+  }
+  .overlay.abierto{opacity:1;pointer-events:auto}
+  .carrito{
+    position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);background:#fff;
+    box-shadow:-10px 0 40px rgba(15,23,42,.2);transform:translateX(100%);
+    transition:transform .25s ease;z-index:100;display:flex;flex-direction:column;
+  }
+  .carrito.abierto{transform:translateX(0)}
+  .carrito .cab{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--borde)}
+  .carrito .cab h3{font-size:1.1rem}
+  .cerrar{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--texto-suave)}
+  .carrito .items{flex-grow:1;overflow-y:auto;padding:14px 22px}
+  .item-carrito{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--borde);align-items:center}
+  .item-carrito .miniatura{
+    width:44px;height:44px;border-radius:10px;flex-shrink:0;
+    background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;
+  }
+  .item-carrito .det{flex-grow:1}
+  .item-carrito .det strong{display:block;font-size:.9rem}
+  .item-carrito .det span{color:var(--texto-suave);font-size:.8rem}
+  .item-carrito .qty{display:flex;align-items:center;gap:8px}
+  .item-carrito .qty button{
+    width:26px;height:26px;border:1px solid var(--borde);border-radius:7px;background:#f6f7fb;
+    cursor:pointer;font-size:.95rem;color:var(--texto);
+  }
+  .carrito-vacio{color:var(--texto-suave);text-align:center;padding:40px 0;font-size:.95rem}
+  .carrito .pie{padding:18px 22px;border-top:1px solid var(--borde)}
+  .carrito .total{display:flex;justify-content:space-between;font-size:1.1rem;font-weight:700;margin-bottom:14px}
+  .btn-checkout{
+    width:100%;background:var(--ok);color:#fff;font-weight:700;padding:14px;border:none;
+    border-radius:12px;cursor:pointer;font-size:1rem;
+  }
+  .btn-checkout:hover{filter:brightness(.95)}
+  .nota-entrega{font-size:.78rem;color:var(--texto-suave);margin-top:10px;text-align:center}
+
+  /* ---------- Checkout ---------- */
+  .checkout-panel{
+    position:fixed;inset:0;z-index:110;background:rgba(15,23,42,.55);
+    display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:30px 16px;
+  }
+  .checkout-panel.abierto{display:flex}
+  .checkout-box{
+    background:#fff;border-radius:var(--radio);max-width:520px;width:100%;
+    padding:30px 28px;box-shadow:0 20px 60px rgba(15,23,42,.35);
+  }
+  .checkout-box h3{margin-bottom:6px}
+  .checkout-box .sub{color:var(--texto-suave);font-size:.9rem;margin-bottom:20px}
+  .checkout-box label{display:block;font-weight:600;font-size:.85rem;margin:14px 0 6px}
+  .checkout-box input{
+    width:100%;padding:12px 14px;border:1px solid var(--borde);border-radius:10px;font-size:.95rem;outline:none;
+  }
+  .checkout-box input:focus{border-color:var(--primario)}
+  .resumen{
+    background:var(--fondo);border-radius:10px;padding:14px 16px;margin:18px 0;font-size:.9rem;
+  }
+  .resumen .linea{display:flex;justify-content:space-between;padding:3px 0}
+  .resumen .total-linea{font-weight:800;border-top:1px solid var(--borde);margin-top:6px;padding-top:8px}
+  #paypal-boton{margin-top:6px;min-height:46px}
+  .aviso-activar{
+    background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:12px 16px;
+    font-size:.85rem;color:#92400e;margin-top:10px;
+  }
+  .btn-volver{background:none;border:none;color:var(--texto-suave);cursor:pointer;font-size:.88rem;margin-top:14px;display:block;margin-left:auto}
+
+  /* ---------- Éxito ---------- */
+  .exito-panel{
+    position:fixed;inset:0;z-index:120;background:rgba(15,23,42,.55);
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .exito-panel.abierto{display:flex}
+  .exito-box{
+    background:#fff;border-radius:var(--radio);max-width:480px;width:100%;text-align:center;padding:40px 30px;
+  }
+  .exito-box .check{
+    width:64px;height:64px;border-radius:50%;background:#dcfce7;color:var(--ok);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:2rem;font-weight:800;
+  }
+  .exito-box h3{margin-bottom:8px}
+  .exito-box p{color:var(--texto-suave);font-size:.95rem;margin-bottom:18px}
+  .descargas{text-align:left;margin:14px 0}
+  .descarga-item{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    background:var(--fondo);border-radius:10px;padding:12px 14px;margin-bottom:8px;font-size:.9rem;
+  }
+  .descarga-item a{font-weight:700;color:var(--primario)}
+  .btn-seguir{background:var(--primario);color:#fff;font-weight:700;padding:12px 26px;border:none;border-radius:12px;cursor:pointer;font-size:.95rem}
+
+  /* ---------- Footer ---------- */
+  footer{background:#0f172a;color:#94a3b8;padding:40px 20px 30px}
+  .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start}
+  .footer-inner h4{color:#fff;margin-bottom:10px;font-size:1rem}
+  .footer-inner ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+  .footer-inner a{color:#94a3b8}
+  .footer-inner a:hover{color:#fff}
+  .footer-legal{
+    max-width:1100px;margin:24px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);
+    font-size:.8rem;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  }
+
+  @media(max-width:820px){
+    nav ul{
+      display:none;position:absolute;top:100%;left:0;right:0;background:#fff;
+      flex-direction:column;padding:20px;gap:16px;border-bottom:1px solid var(--borde);
+      box-shadow:var(--sombra);
+    }
+    #menu-toggle:checked ~ nav ul{display:flex}
+    .menu-icon{display:block}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAVEGACIÓN ================= -->
+<header>
+  <div class="nav">
+    <a href="../index.html" class="logo">Herramientas<span>TOP</span></a>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon" aria-label="Abrir menú">&#9776;</label>
+    <nav>
+      <ul>
+        <li><a href="../index.html#ofertas">Ofertas destacadas</a></li>
+        <li><a href="../index.html#categorias">Categorías</a></li>
+        <li><a href="../index.html" class="activo">Tienda</a></li>
+        <li><a href="../mejores-herramientas-para-ganar-dinero-online.html">Guías</a></li>
+        <li><a href="#" class="btn-nav carrito-link" onclick="abrirCarrito();return false;">Carrito <span class="contador" id="contador-carrito" style="display:none">0</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero-tienda">
+  <div class="badge">Entrega digital inmediata · Pago seguro con PayPal</div>
+  <h1>Recursos digitales para tu negocio</h1>
+  <p>Plantillas, guías y herramientas listas para usar. Descárgalas al instante y ponlas a trabajar hoy mismo.</p>
+</div>
+
+<!-- ================= CATÁLOGO ================= -->
+<section class="catalogo">
+  <div class="grid" id="grid-productos"></div>
+</section>
+
+<!-- ================= CARRITO (drawer) ================= -->
+<div class="overlay" id="overlay" onclick="cerrarCarrito()"></div>
+<aside class="carrito" id="carrito">
+  <div class="cab">
+    <h3>Tu carrito</h3>
+    <button class="cerrar" onclick="cerrarCarrito()" aria-label="Cerrar carrito">&times;</button>
+  </div>
+  <div class="items" id="items-carrito"></div>
+  <div class="pie">
+    <div class="total"><span>Total</span><span id="total-carrito">0,00 €</span></div>
+    <button class="btn-checkout" id="btn-checkout" onclick="abrirCheckout()">Finalizar compra</button>
+    <div class="nota-entrega">Entrega digital: recibirás el enlace de descarga tras el pago.</div>
+  </div>
+</aside>
+
+<!-- ================= CHECKOUT ================= -->
+<div class="checkout-panel" id="checkout-panel">
+  <div class="checkout-box">
+    <h3>Finalizar compra</h3>
+    <p class="sub">Rellena tus datos para continuar con el pago seguro.</p>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="name">
+    <label for="email">Email (para recibir tu descarga)</label>
+    <input type="email" id="email" placeholder="tu@email.com" autocomplete="email">
+    <div class="resumen" id="resumen-checkout"></div>
+    <div id="paypal-boton"></div>
+    <button class="btn-volver" onclick="cerrarCheckout()">← Volver al carrito</button>
+  </div>
+</div>
+
+<!-- ================= ÉXITO ================= -->
+<div class="exito-panel" id="exito-panel">
+  <div class="exito-box">
+    <div class="check">&#10003;</div>
+    <h3>¡Pago recibido!</h3>
+    <p>Gracias por tu compra. Aquí tienes tus descargas:</p>
+    <div class="descargas" id="descargas"></div>
+    <button class="btn-seguir" onclick="cerrarExito()">Seguir navegando</button>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>HerramientasTOP</h4>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../index.html#ofertas">Ofertas destacadas</a></li>
+        <li><a href="../mejores-herramientas-para-ganar-dinero-online.html">Guías</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="../index.html#transparencia">Divulgación de afiliados</a></li>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Aviso legal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">contacto@tudominio.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <span>© <span id="anio"></span> HerramientasTOP. Todos los derechos reservados.</span>
+    <span>Pagos procesados de forma segura por PayPal.</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIGURACIÓN DE LA TIENDA
+   ============================================================ */
+
+// 1) Pega aquí tu Client ID de PayPal (ver TIENDA.md).
+//    Mientras sea "TU_CLIENT_ID_PAYPAL", la tienda mostrará un
+//    aviso de activación en lugar del botón de pago.
+const PAYPAL_CLIENT_ID = "TU_CLIENT_ID_PAYPAL";
+
+// 2) Moneda (EUR, USD, MXN, ...) — debe coincidir con tu cuenta PayPal
+const MONEDA = "EUR";
+const SIMBOLO = "€";
+
+// 3) Tus productos. Para cada uno:
+//    - id: único, sin espacios
+//    - nombre, descripcion, categoria
+//    - precio: número (ej. 9.90)
+//    - c1, c2: colores del icono (gradiente)
+//    - icono: dibujo SVG (mismo tamaño 40x40)
+//    - badge: etiqueta opcional ("Más vendido")
+//    - downloadUrl: enlace de tu archivo (Google Drive/WeTransfer/URL
+//      directa). Déjalo en null si aún no tienes el archivo.
+const PRODUCTOS = [
+  {
+    id: "guia-ganar-dinero-online",
+    nombre: "Guía: Cómo ganar dinero online desde cero",
+    descripcion: "23 páginas con el método paso a paso para montar tu primer ingreso digital, con ejemplos reales y plantillas de acción.",
+    categoria: "Ebook · PDF",
+    precio: 9.90,
+    c1: "#4338ca", c2: "#22d3ee",
+    badge: "Más vendido",
+    downloadUrl: null,
+    icono: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg>'
+  },
+  {
+    id: "plantilla-plan-negocio-notion",
+    nombre: "Plantilla de Plan de Negocio en Notion",
+    descripcion: "Organiza objetivos, finanzas y acciones en una plantilla profesional de Notion. Duplica y empieza a trabajar en 5 minutos.",
+    categoria: "Plantilla · Notion",
+    precio: 14.90,
+    c1: "#1f1f1f", c2: "#555555",
+    badge: "Plantilla",
+    downloadUrl: null,
+    icono: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>'
+  },
+  {
+    id: "pack-plantillas-redes",
+    nombre: "Pack: 50 plantillas para redes sociales (Canva)",
+    descripcion: "50 diseños editables en Canva para Instagram, TikTok y Pinterest. Cambia tu marca y publica en minutos.",
+    categoria: "Plantillas · Canva",
+    precio: 19.90,
+    c1: "#00c4cc", c2: "#7d2ae8",
+    badge: "Pack",
+    downloadUrl: null,
+    icono: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="M21 15l-5-5L5 21"/></svg>'
+  },
+  {
+    id: "checklist-lanzamiento",
+    nombre: "Checklist de lanzamiento para tu negocio digital",
+    descripcion: "La lista definitiva de 40 pasos para lanzar tu producto o servicio sin olvidar nada. PDF imprimible.",
+    categoria: "Checklist · PDF",
+    precio: 4.90,
+    c1: "#16a34a", c2: "#4ade80",
+    badge: "Oferta",
+    downloadUrl: null,
+    icono: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>'
+  }
+];
+
+/* ============================================================
+   LÓGICA DE LA TIENDA (no tocar salvo que sepas lo que haces)
+   ============================================================ */
+const CARRITO_KEY = "ht_carrito";
+let carrito = JSON.parse(localStorage.getItem(CARRITO_KEY) || "{}");
+
+function fmt(n){ return n.toFixed(2).replace(".", ",") + " " + SIMBOLO; }
+
+function renderProductos(){
+  const grid = document.getElementById("grid-productos");
+  grid.innerHTML = PRODUCTOS.map(p => `
+    <article class="producto">
+      <div class="portada" style="--c1:${p.c1};--c2:${p.c2}">
+        ${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
+        ${p.icono}
+      </div>
+      <div class="info">
+        <span class="categoria">${p.categoria}</span>
+        <h3>${p.nombre}</h3>
+        <p>${p.descripcion}</p>
+        <div class="fila">
+          <span class="precio">${fmt(p.precio)} <small>IVA no incl.</small></span>
+          <button class="btn-add" onclick="agregar('${p.id}')">Añadir al carrito</button>
+        </div>
+      </div>
+    </article>`).join("");
+}
+
+function guardar(){ localStorage.setItem(CARRITO_KEY, JSON.stringify(carrito)); actualizarUI(); }
+
+function agregar(id){
+  carrito[id] = (carrito[id] || 0) + 1;
+  guardar();
+  abrirCarrito();
+}
+
+function cambiarQty(id, delta){
+  carrito[id] = (carrito[id] || 0) + delta;
+  if (carrito[id] <= 0) delete carrito[id];
+  guardar();
+}
+
+function quitar(id){ delete carrito[id]; guardar(); }
+
+function totalCarrito(){
+  return Object.entries(carrito).reduce((sum, [id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id === id);
+    return sum + (p ? p.precio * qty : 0);
+  }, 0);
+}
+
+function contarItems(){
+  return Object.values(carrito).reduce((a, b) => a + b, 0);
+}
+
+function actualizarUI(){
+  const contador = document.getElementById("contador-carrito");
+  const n = contarItems();
+  contador.textContent = n;
+  contador.style.display = n ? "flex" : "none";
+
+  const items = document.getElementById("items-carrito");
+  const total = document.getElementById("total-carrito");
+  const btnCheckout = document.getElementById("btn-checkout");
+
+  if (n === 0){
+    items.innerHTML = `<div class="carrito-vacio">Tu carrito está vacío.<br>Añade algún producto para empezar.</div>`;
+    total.textContent = "0,00 " + SIMBOLO;
+    btnCheckout.disabled = true;
+    return;
+  }
+  btnCheckout.disabled = false;
+  items.innerHTML = Object.entries(carrito).map(([id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id === id);
+    if (!p) return "";
+    return `
+      <div class="item-carrito">
+        <div class="miniatura" style="--c1:${p.c1};--c2:${p.c2}">${p.icono}</div>
+        <div class="det">
+          <strong>${p.nombre}</strong>
+          <span>${fmt(p.precio)} c/u</span>
+        </div>
+        <div class="qty">
+          <button onclick="cambiarQty('${p.id}',-1)">−</button>
+          <span>${qty}</span>
+          <button onclick="cambiarQty('${p.id}',1)">+</button>
+        </div>
+      </div>`;
+  }).join("");
+  total.textContent = fmt(totalCarrito());
+}
+
+function abrirCarrito(){
+  document.getElementById("carrito").classList.add("abierto");
+  document.getElementById("overlay").classList.add("abierto");
+}
+function cerrarCarrito(){
+  document.getElementById("carrito").classList.remove("abierto");
+  document.getElementById("overlay").classList.remove("abierto");
+}
+
+/* ---------- Checkout ---------- */
+function abrirCheckout(){
+  if (contarItems() === 0) return;
+  const resumen = document.getElementById("resumen-checkout");
+  resumen.innerHTML = Object.entries(carrito).map(([id, qty]) => {
+    const p = PRODUCTOS.find(x => x.id === id);
+    if (!p) return "";
+    return `<div class="linea"><span>${p.nombre} × ${qty}</span><span>${fmt(p.precio * qty)}</span></div>`;
+  }).join("") + `<div class="linea total-linea"><span>Total</span><span>${fmt(totalCarrito())}</span></div>`;
+  document.getElementById("checkout-panel").classList.add("abierto");
+  renderPayPal();
+}
+function cerrarCheckout(){ document.getElementById("checkout-panel").classList.remove("abierto"); }
+
+function validarDatos(){
+  const nombre = document.getElementById("nombre").value.trim();
+  const email = document.getElementById("email").value.trim();
+  if (!nombre){ alert("Escribe tu nombre."); return false; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert("Escribe un email válido."); return false; }
+  return { nombre, email };
+}
+
+function renderPayPal(){
+  const contenedor = document.getElementById("paypal-boton");
+  contenedor.innerHTML = "";
+
+  if (!PAYPAL_CLIENT_ID || PAYPAL_CLIENT_ID === "TU_CLIENT_ID_PAYPAL"){
+    contenedor.innerHTML = `
+      <div class="aviso-activar">
+        <strong>Pagos pendientes de activar.</strong><br>
+        Para cobrar, pega tu Client ID de PayPal en el archivo
+        <code>tienda/index.html</code> (constante PAYPAL_CLIENT_ID).
+        Guía en TIENDA.md — son 5 minutos.
+      </div>`;
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=${MONEDA}`;
+  script.onload = () => {
+    const compra = Object.entries(carrito).map(([id, qty]) => {
+      const p = PRODUCTOS.find(x => x.id === id);
+      return { nombre: p.nombre, cantidad: qty, precio: p.precio.toFixed(2) };
+    });
+    paypal.Buttons({
+      style: { layout: "vertical", shape: "rect", color: "gold" },
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{
+          description: "Compra en HerramientasTOP",
+          amount: {
+            currency_code: MONEDA,
+            value: totalCarrito().toFixed(2),
+            breakdown: { item_total: { currency_code: MONEDA, value: totalCarrito().toFixed(2) } }
+          },
+          items: compra.map(c => ({
+            name: c.nombre.slice(0, 127),
+            unit_amount: { currency_code: MONEDA, value: c.precio },
+            quantity: String(c.cantidad)
+          }))
+        }]
+      }),
+      onApprove: async (data, actions) => {
+        try {
+          await actions.order.capture();
+          completarCompra();
+        } catch (e){
+          alert("No se pudo confirmar el pago. Inténtalo de nuevo.");
+        }
+      }
+    }).render("#paypal-boton");
+  };
+  script.onerror = () => {
+    contenedor.innerHTML = `<div class="aviso-activar">No se pudo cargar PayPal. Comprueba tu conexión.</div>`;
+  };
+  document.body.appendChild(script);
+}
+
+function completarCompra(){
+  const datos = validarDatos();
+  if (!datos) return;
+
+  const descargas = document.getElementById("descargas");
+  const comprados = Object.keys(carrito).map(id => PRODUCTOS.find(p => p.id === id)).filter(Boolean);
+  descargas.innerHTML = comprados.map(p => {
+    if (p.downloadUrl){
+      return `<div class="descarga-item"><span>${p.nombre}</span><a href="${p.downloadUrl}" target="_blank" rel="noopener">Descargar</a></div>`;
+    }
+    return `<div class="descarga-item"><span>${p.nombre}</span><em>Enlace pendiente de configurar</em></div>`;
+  }).join("");
+
+  cerrarCheckout();
+  cerrarCarrito();
+  carrito = {};
+  guardar();
+  document.getElementById("exito-panel").classList.add("abierto");
+}
+function cerrarExito(){ document.getElementById("exito-panel").classList.remove("abierto"); }
+
+/* ---------- Init ---------- */
+document.getElementById("anio").textContent = new Date().getFullYear();
+renderProductos();
+actualizarUI();
+</script>
+
+</body>
+</html>
