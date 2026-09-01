@@ -400,6 +400,9 @@ const PRODUCTOS = [
   }
 ];
 
+// Expone el catálogo para el asistente IA (asistente-ia.js)
+window.PRODUCTOS = PRODUCTOS;
+
 /* ============================================================
    LÓGICA DE LA TIENDA (no tocar salvo que sepas lo que haces)
    ============================================================ */
@@ -605,5 +608,6 @@ renderProductos();
 actualizarUI();
 </script>
 
+<script src="../asistente-ia.js" defer></script>
 </body>
 </html>
