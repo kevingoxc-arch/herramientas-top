@@ -110,6 +110,20 @@
   .seccion-titulo h2{font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:12px}
   .seccion-titulo p{color:var(--texto-suave)}
 
+  /* ---------- Banner guía ---------- */
+  .banner-guia{max-width:1100px;margin:44px auto 0;padding:0 20px}
+  .banner-guia a{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    background:linear-gradient(90deg,#0ea5b7,#5b5bd6);color:#fff;border-radius:var(--radio);
+    padding:24px 30px;box-shadow:var(--sombra);transition:transform .15s ease;
+  }
+  .banner-guia a:hover{transform:translateY(-3px)}
+  .banner-guia strong{font-size:1.15rem;display:block;margin-bottom:4px}
+  .banner-guia span{font-size:.92rem;opacity:.92}
+  .banner-guia .flecha{
+    background:#fff;color:var(--primario-osc);font-weight:700;padding:10px 22px;border-radius:999px;white-space:nowrap;
+  }
+
   /* ---------- Tarjetas de ofertas ---------- */
   .ofertas{background:#fff;border-top:1px solid var(--borde);border-bottom:1px solid var(--borde)}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
@@ -234,6 +248,7 @@
         <li><a href="#ofertas">Ofertas destacadas</a></li>
         <li><a href="#categorias">Categorías</a></li>
         <li><a href="#transparencia">Por qué confiar</a></li>
+        <li><a href="mejores-herramientas-para-ganar-dinero-online.html">Guías</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#newsletter" class="btn-nav">Suscríbete</a></li>
       </ul>
@@ -270,6 +285,17 @@
       <div><strong>Transparencia total</strong><small>Puedes ganar comisiones por tu compra</small></div>
     </div>
   </div>
+</div>
+
+<!-- ================= BANNER GUÍA ================= -->
+<div class="banner-guia">
+  <a href="mejores-herramientas-para-ganar-dinero-online.html">
+    <div>
+      <strong>Nueva guía: las 10 mejores herramientas para ganar dinero online en 2026</strong>
+      <span>Comparativa completa con precios, pros y contras. Léela gratis.</span>
+    </div>
+    <span class="flecha">Leer la guía</span>
+  </a>
 </div>
 
 <!-- ================= OFERTAS DESTACADAS ================= -->
